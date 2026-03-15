@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali Travel OS</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#0f766e">
+
+<link rel="apple-touch-icon" href="icon.png">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Arial;
+margin:0;
+background:#f4f4f4;
+color:#222;
+}
+
+header{
+background:#0f766e;
+color:white;
+padding:18px;
+text-align:center;
+}
+
+section{
+background:white;
+margin:12px;
+padding:16px;
+border-radius:10px;
+}
+
+h2{margin-top:0;}
+
+details{
+margin-bottom:10px;
+padding:8px;
+border-left:4px solid #0f766e;
+background:#fafafa;
+border-radius:6px;
+}
+
+summary{
+font-weight:bold;
+cursor:pointer;
+}
+
+button{
+padding:6px 10px;
+border:none;
+border-radius:6px;
+background:#0f766e;
+color:white;
+margin-top:6px;
+cursor:pointer;
+}
+
+button.copy{background:#2563eb;}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+td,th{
+padding:6px;
+border-bottom:1px solid #eee;
+}
+
+.total{
+font-weight:bold;
+font-size:18px;
+}
+
+.emergency{
+background:#fff4e5;
+border-left:4px solid orange;
+}
+
+.checklist label{
+display:block;
+margin-bottom:4px;
+}
+
+.photo{
+width:100%;
+margin-top:8px;
+border-radius:8px;
+}
+
+footer{
+text-align:center;
+font-size:12px;
+padding:16px;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Bali Family Trip</h1>
+<p>24 Mar – 31 Mar</p>
+</header>
+
+<section>
+
+<h2>Hotel</h2>
+
+<p id="hotel">
+Hilton Bali Resort  
+Jl. Raya Nusa Dua Selatan
+</p>
+
+<button class="copy" onclick="copyText('hotel')">Copy Address</button>
+
+<a href="https://maps.google.com/?q=Hilton+Bali+Resort">
+<button>Open Map</button>
+</a>
+
+</section>
+
+<section>
+
+<h2>Itinerary</h2>
+
+<details>
+<summary>Day 1 – Arrival</summary>
+Airport pickup<br>
+Hotel check-in<br>
+Beach walk<br>
+Dinner
+</details>
+
+<details>
+<summary>Day 2 – Ubud</summary>
+
+Tukad Cepung Waterfall<br>
+Rice terraces<br>
+Ubud market<br>
+
+<a href="https://maps.google.com/?q=Tukad+Cepung+Waterfall">
+<button>Open Map</button>
+</a>
+
+</details>
+
+<details>
+<summary>Day 3 – Adventure</summary>
+
+ATV Quad Bike<br>
+Ayung River Rafting
+
+</details>
+
+<details>
+<summary>Day 4 – Sunset</summary>
+
+Visit Tanah Lot Temple
+
+<a href="https://maps.google.com/?q=Tanah+Lot+Temple">
+<button>Open Map</button>
+</a>
+
+</details>
+
+</section>
+
+<section>
+
+<h2>Quick Maps</h2>
+
+<a href="https://maps.google.com/?q=Ubud"><button>Ubud</button></a>
+
+<a href="https://maps.google.com/?q=Tanah+Lot+Temple"><button>Tanah Lot</button></a>
+
+<a href="https://maps.google.com/?q=Nusa+Penida"><button>Nusa Penida</button></a>
+
+</section>
+
+<section>
+
+<h2>Budget Calculator</h2>
+
+<table>
+
+<tr>
+<th>Activity</th>
+<th>IDR</th>
+</tr>
+
+<tr>
+<td>ATV</td>
+<td><input type="number" value="900000" class="cost"></td>
+</tr>
+
+<tr>
+<td>Rafting</td>
+<td><input type="number" value="750000" class="cost"></td>
+</tr>
+
+<tr>
+<td>Temple Entry</td>
+<td><input type="number" value="50000" class="cost"></td>
+</tr>
+
+</table>
+
+<br>
+
+<button onclick="calculate()">Calculate Total</button>
+
+<p class="total">Total: <span id="total">0</span> IDR</p>
+
+</section>
+
+<section>
+
+<h2>Currency Converter</h2>
+
+<input id="aud" type="number" placeholder="AUD">
+
+<button onclick="convert()">Convert</button>
+
+<p id="idr"></p>
+
+<p style="font-size:12px;">Approximate rate</p>
+
+</section>
+
+<section class="checklist">
+
+<h2>Packing Checklist</h2>
+
+<label><input type="checkbox" class="pack"> Passport</label>
+<label><input type="checkbox" class="pack"> Travel Insurance</label>
+<label><input type="checkbox" class="pack"> Swimsuit</label>
+<label><input type="checkbox" class="pack"> Sunscreen</label>
+<label><input type="checkbox" class="pack"> Power Adapter</label>
+
+</section>
+
+<section>
+
+<h2>Photo Journal</h2>
+
+<input type="file" id="photoInput">
+
+<div id="photos"></div>
+
+</section>
+
+<section class="emergency">
+
+<h2>Emergency Card</h2>
+
+<p id="driver">
+Driver: +62 8123456789
+</p>
+
+<button class="copy" onclick="copyText('driver')">Copy Driver</button>
+
+<p>Police: 110</p>
+<p>Ambulance: 118</p>
+
+</section>
+
+<footer>
+Bali Travel OS
+</footer>
+
+<script>
+
+function copyText(id){
+let text=document.getElementById(id).innerText;
+navigator.clipboard.writeText(text);
+alert("Copied");
+}
+
+function calculate(){
+
+let costs=document.querySelectorAll(".cost");
+let total=0;
+
+costs.forEach(c=>{
+total+=Number(c.value);
+});
+
+document.getElementById("total").innerText=total.toLocaleString();
+
+}
+
+function convert(){
+
+let aud=document.getElementById("aud").value;
+
+let rate=10000;
+
+let idr=aud*rate;
+
+document.getElementById("idr").innerText=idr.toLocaleString()+" IDR";
+
+}
+
+let checks=document.querySelectorAll(".pack");
+
+checks.forEach((c,i)=>{
+
+let saved=localStorage.getItem("pack"+i);
+
+if(saved==="true"){c.checked=true;}
+
+c.addEventListener("change",()=>{
+localStorage.setItem("pack"+i,c.checked);
+});
+
+});
+
+let input=document.getElementById("photoInput");
+
+let photoContainer=document.getElementById("photos");
+
+input.addEventListener("change",function(){
+
+let file=this.files[0];
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+let img=document.createElement("img");
+
+img.src=e.target.result;
+
+img.className="photo";
+
+photoContainer.appendChild(img);
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+</body>
+</html>
