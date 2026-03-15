@@ -1,15 +1,9 @@
 {
-  "name": "Bali Family Trip",
-  "short_name": "Bali Trip",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0f766e",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "name":"Bali Travel Dashboard",
+  "short_name":"Bali Trip",
+  "start_url":"index.html",
+  "display":"standalone",
+  "background_color":"#ffffff",
+  "theme_color":"#0f766e",
+  "icons":[{"src":"icon.png","sizes":"512x512","type":"image/png"}]
 }
