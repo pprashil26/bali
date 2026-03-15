@@ -5,354 +5,268 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bali Travel OS</title>
 
-<link rel="manifest" href="manifest.json">
-
-<meta name="theme-color" content="#0f766e">
-
-<link rel="apple-touch-icon" href="icon.png">
-
 <style>
-
 body{
-font-family:system-ui,-apple-system,Arial;
-margin:0;
-background:#f4f4f4;
-color:#222;
+  font-family: system-ui, -apple-system, Arial;
+  margin:0;
+  background:#f0f2f5;
+  color:#222;
 }
 
+/* Header */
 header{
-background:#0f766e;
-color:white;
-padding:18px;
-text-align:center;
+  background:#0f766e;
+  color:white;
+  padding:14px 10px;
+  text-align:center;
+  font-size:1.1rem;
 }
 
+/* Container cards */
 section{
-background:white;
-margin:12px;
-padding:16px;
-border-radius:10px;
+  background:white;
+  margin:8px 10px;
+  padding:12px;
+  border-radius:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
-h2{margin-top:0;}
+/* Titles */
+h2{
+  margin-top:0;
+  font-size:1.1rem;
+  color:#0f766e;
+  border-bottom:1px solid #e0e0e0;
+  padding-bottom:4px;
+  margin-bottom:8px;
+}
 
+/* Collapsible itinerary */
 details{
-margin-bottom:10px;
-padding:8px;
-border-left:4px solid #0f766e;
-background:#fafafa;
-border-radius:6px;
+  margin-bottom:6px;
+  padding:6px;
+  border-left:4px solid #0f766e;
+  background:#fafafa;
+  border-radius:6px;
 }
 
 summary{
-font-weight:bold;
-cursor:pointer;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:0.95rem;
 }
 
+/* Buttons */
 button{
-padding:6px 10px;
-border:none;
-border-radius:6px;
-background:#0f766e;
-color:white;
-margin-top:6px;
-cursor:pointer;
+  padding:5px 8px;
+  border:none;
+  border-radius:6px;
+  background:#0f766e;
+  color:white;
+  margin:3px 0;
+  cursor:pointer;
+  font-size:0.9rem;
 }
 
-button.copy{background:#2563eb;}
+button.copy{
+  background:#2563eb;
+}
 
+/* Tables */
 table{
-width:100%;
-border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.9rem;
 }
 
 td,th{
-padding:6px;
-border-bottom:1px solid #eee;
+  padding:4px;
+  border-bottom:1px solid #eee;
 }
 
-.total{
-font-weight:bold;
-font-size:18px;
-}
-
+/* Emergency card */
 .emergency{
-background:#fff4e5;
-border-left:4px solid orange;
+  background:#fff4e5;
+  border-left:4px solid orange;
+  padding:8px;
+  font-size:0.9rem;
 }
 
+/* Packing checklist */
 .checklist label{
-display:block;
-margin-bottom:4px;
+  display:block;
+  margin-bottom:4px;
+  font-size:0.9rem;
 }
 
+/* Photos */
 .photo{
-width:100%;
-margin-top:8px;
-border-radius:8px;
+  width:100%;
+  margin-top:6px;
+  border-radius:6px;
 }
 
-footer{
-text-align:center;
-font-size:12px;
-padding:16px;
-color:#777;
+/* Total */
+.total{
+  font-weight:bold;
+  font-size:1rem;
 }
 
+/* Compact Trip Card */
+#tripcard{
+  background:#e0f7f6;
+  border-left:4px solid #0f766e;
+  padding:8px;
+  margin-bottom:6px;
+  font-size:0.95rem;
+}
+
+/* Print styles */
+@media print {
+  body * {visibility:hidden;}
+  #tripcard, #tripcard * {visibility:visible;}
+  #tripcard{position:absolute;left:0;top:0;width:100%;font-size:14px;}
+  button {display:none;}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Bali Family Trip</h1>
-<p>24 Mar – 31 Mar</p>
+Bali Travel OS – 24 Mar to 31 Mar
 </header>
 
-<section>
-
-<h2>Hotel</h2>
-
-<p id="hotel">
-Hilton Bali Resort  
-Jl. Raya Nusa Dua Selatan
-</p>
-
-<button class="copy" onclick="copyText('hotel')">Copy Address</button>
-
-<a href="https://maps.google.com/?q=Hilton+Bali+Resort">
-<button>Open Map</button>
-</a>
-
+<!-- Trip Card -->
+<section id="tripcard">
+<h2>Trip Card</h2>
+<b>Dates:</b> 24 Mar – 31 Mar<br>
+<b>Hotel:</b> Hilton Bali Resort, Jl. Raya Nusa Dua Selatan<br>
+<b>Driver:</b> Wayan, +62 8123456789<br>
+<b>Emergency:</b> Police 110 / Ambulance 118<br>
+<b>Key Places:</b> Airport, Ubud, Tanah Lot, Nusa Penida
 </section>
 
-<section>
+<button onclick="window.print()">Print Trip Card</button>
 
+<!-- Itinerary -->
+<section>
 <h2>Itinerary</h2>
-
-<details>
-<summary>Day 1 – Arrival</summary>
-Airport pickup<br>
-Hotel check-in<br>
-Beach walk<br>
-Dinner
+<details><summary>Day 1 – Arrival</summary>
+Airport pickup<br>Hotel check-in<br>Beach walk<br>Dinner
 </details>
-
-<details>
-<summary>Day 2 – Ubud</summary>
-
-Tukad Cepung Waterfall<br>
-Rice terraces<br>
-Ubud market<br>
-
-<a href="https://maps.google.com/?q=Tukad+Cepung+Waterfall">
-<button>Open Map</button>
-</a>
-
+<details><summary>Day 2 – Ubud</summary>
+Tukad Cepung Waterfall<br>Rice terraces<br>Ubud market<br>
+<a href="https://maps.google.com/?q=Tukad+Cepung+Waterfall"><button>Map</button></a>
 </details>
-
-<details>
-<summary>Day 3 – Adventure</summary>
-
-ATV Quad Bike<br>
-Ayung River Rafting
-
+<details><summary>Day 3 – Adventure</summary>
+ATV Quad Bike<br>Ayung River Rafting
 </details>
-
-<details>
-<summary>Day 4 – Sunset</summary>
-
-Visit Tanah Lot Temple
-
-<a href="https://maps.google.com/?q=Tanah+Lot+Temple">
-<button>Open Map</button>
-</a>
-
+<details><summary>Day 4 – Sunset</summary>
+Tanah Lot Temple<br>
+<a href="https://maps.google.com/?q=Tanah+Lot+Temple"><button>Map</button></a>
 </details>
-
 </section>
 
+<!-- Quick Maps -->
 <section>
-
 <h2>Quick Maps</h2>
-
 <a href="https://maps.google.com/?q=Ubud"><button>Ubud</button></a>
-
 <a href="https://maps.google.com/?q=Tanah+Lot+Temple"><button>Tanah Lot</button></a>
-
 <a href="https://maps.google.com/?q=Nusa+Penida"><button>Nusa Penida</button></a>
-
 </section>
 
+<!-- Budget -->
 <section>
-
-<h2>Budget Calculator</h2>
-
+<h2>Budget</h2>
 <table>
-
-<tr>
-<th>Activity</th>
-<th>IDR</th>
-</tr>
-
-<tr>
-<td>ATV</td>
-<td><input type="number" value="900000" class="cost"></td>
-</tr>
-
-<tr>
-<td>Rafting</td>
-<td><input type="number" value="750000" class="cost"></td>
-</tr>
-
-<tr>
-<td>Temple Entry</td>
-<td><input type="number" value="50000" class="cost"></td>
-</tr>
-
+<tr><th>Activity</th><th>IDR</th></tr>
+<tr><td>ATV</td><td><input type="number" value="900000" class="cost"></td></tr>
+<tr><td>Rafting</td><td><input type="number" value="750000" class="cost"></td></tr>
+<tr><td>Temple Entry</td><td><input type="number" value="50000" class="cost"></td></tr>
 </table>
-
-<br>
-
 <button onclick="calculate()">Calculate Total</button>
-
 <p class="total">Total: <span id="total">0</span> IDR</p>
-
 </section>
 
+<!-- Currency -->
 <section>
-
 <h2>Currency Converter</h2>
-
 <input id="aud" type="number" placeholder="AUD">
-
 <button onclick="convert()">Convert</button>
-
 <p id="idr"></p>
-
-<p style="font-size:12px;">Approximate rate</p>
-
 </section>
 
+<!-- Packing -->
 <section class="checklist">
-
 <h2>Packing Checklist</h2>
-
 <label><input type="checkbox" class="pack"> Passport</label>
 <label><input type="checkbox" class="pack"> Travel Insurance</label>
 <label><input type="checkbox" class="pack"> Swimsuit</label>
 <label><input type="checkbox" class="pack"> Sunscreen</label>
 <label><input type="checkbox" class="pack"> Power Adapter</label>
-
 </section>
 
+<!-- Photo Journal -->
 <section>
-
 <h2>Photo Journal</h2>
-
 <input type="file" id="photoInput">
-
 <div id="photos"></div>
-
 </section>
 
+<!-- Emergency -->
 <section class="emergency">
-
-<h2>Emergency Card</h2>
-
-<p id="driver">
-Driver: +62 8123456789
-</p>
-
+<h2>Emergency</h2>
+<p id="driver">Driver: +62 8123456789</p>
 <button class="copy" onclick="copyText('driver')">Copy Driver</button>
-
-<p>Police: 110</p>
-<p>Ambulance: 118</p>
-
+<p>Police: 110 / Ambulance: 118</p>
 </section>
 
-<footer>
+<footer style="text-align:center;font-size:12px;padding:12px;color:#777;">
 Bali Travel OS
 </footer>
 
 <script>
-
 function copyText(id){
-let text=document.getElementById(id).innerText;
-navigator.clipboard.writeText(text);
-alert("Copied");
+  let text=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text);
+  alert("Copied");
 }
 
 function calculate(){
-
-let costs=document.querySelectorAll(".cost");
-let total=0;
-
-costs.forEach(c=>{
-total+=Number(c.value);
-});
-
-document.getElementById("total").innerText=total.toLocaleString();
-
+  let costs=document.querySelectorAll(".cost");
+  let total=0;
+  costs.forEach(c=>total+=Number(c.value));
+  document.getElementById("total").innerText=total.toLocaleString();
 }
 
 function convert(){
-
-let aud=document.getElementById("aud").value;
-
-let rate=10000;
-
-let idr=aud*rate;
-
-document.getElementById("idr").innerText=idr.toLocaleString()+" IDR";
-
+  let aud=document.getElementById("aud").value;
+  let rate=10000;
+  document.getElementById("idr").innerText=(aud*rate).toLocaleString()+" IDR";
 }
 
+// Persist packing checklist
 let checks=document.querySelectorAll(".pack");
-
 checks.forEach((c,i)=>{
-
-let saved=localStorage.getItem("pack"+i);
-
-if(saved==="true"){c.checked=true;}
-
-c.addEventListener("change",()=>{
-localStorage.setItem("pack"+i,c.checked);
+  if(localStorage.getItem("pack"+i)==="true"){c.checked=true;}
+  c.addEventListener("change",()=>{localStorage.setItem("pack"+i,c.checked);});
 });
 
-});
-
+// Photo journal
 let input=document.getElementById("photoInput");
-
-let photoContainer=document.getElementById("photos");
-
+let container=document.getElementById("photos");
 input.addEventListener("change",function(){
-
-let file=this.files[0];
-
-let reader=new FileReader();
-
-reader.onload=function(e){
-
-let img=document.createElement("img");
-
-img.src=e.target.result;
-
-img.className="photo";
-
-photoContainer.appendChild(img);
-
-};
-
-reader.readAsDataURL(file);
-
+  let file=this.files[0];
+  let reader=new FileReader();
+  reader.onload=function(e){
+    let img=document.createElement("img");
+    img.src=e.target.result;
+    img.className="photo";
+    container.appendChild(img);
+  };
+  reader.readAsDataURL(file);
 });
-
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
-}
-
 </script>
 
 </body>
